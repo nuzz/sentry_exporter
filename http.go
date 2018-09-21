@@ -43,9 +43,9 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 		Timeout: module.Timeout,
 	}
 
- 	requestURL := config.Prefix + target + "/stats/?stats=received"
+ 	requestURL := config.Prefix + target
 	log.Infof(requestURL)
-	log.Infof("URL should be https://sentry.io/api/0/projects/{organization}/{target}/stats/")
+	log.Infof("URL should be https://sentry.io/api/0/projects/{organization}/%s", target)
 	log.Infof("I believe that the endpoint we are hitting requires additional info.")
 	request, err := http.NewRequest("GET", requestURL, nil)
 	if err != nil {
