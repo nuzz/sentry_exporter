@@ -57,6 +57,8 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 	if err != nil && resp == nil {
 		log.Warnf("Error for HTTP request to %s: %s", target, err)
 	} else {
+		log.Infof(resp.StatusCode)
+		log.Infof(resp.Body)
 		defer resp.Body.Close()
 		if len(config.ValidStatusCodes) != 0 {
 			for _, code := range config.ValidStatusCodes {
