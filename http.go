@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 	"strconv"
-
+	"time"
 	"github.com/prometheus/common/log"
 )
 
@@ -42,8 +42,9 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 	client := &http.Client{
 		Timeout: module.Timeout,
 	}
-
- 	requestURL := config.Prefix + target
+	timestamp := strconv.FormatInt(time.Now().UTC().UnixNano(), 10)
+	log.Infof(timestamp)
+ 	requestURL := config.Prefix + target + "/stats/?stat=received&since=1537531898&until=" + timestamp
 	log.Infof(requestURL)
 	log.Infof("URL should be https://sentry.io/api/0/projects/{organization}/%s", target)
 	log.Infof("I believe that the endpoint we are hitting requires additional info.")
