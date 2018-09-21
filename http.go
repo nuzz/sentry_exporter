@@ -28,6 +28,14 @@ func extractErrorRate(reader io.Reader, config HTTPProbe) int {
 	return 0
 }
 
+func printRespBody(reader io.Reader) string {
+	body, err:= ioutil.ReadAll(reader)
+	if err != nil {
+		return "Error reading HTTP body"
+	}
+	var str = string(body)
+	return str
+}
 func probeHTTP(target string, w http.ResponseWriter, module Module) (success bool) {
 	config := module.HTTP
 
@@ -57,8 +65,9 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 	if err != nil && resp == nil {
 		log.Warnf("Error for HTTP request to %s: %s", target, err)
 	} else {
-		log.Infof(resp.StatusCode)
-		log.Infof(resp.Body)
+		status := strconv.Itoa(resp.StatusCode)
+		log.Infof(status)
+		log.Infof(printRespBody(resp.Body))
 		defer resp.Body.Close()
 		if len(config.ValidStatusCodes) != 0 {
 			for _, code := range config.ValidStatusCodes {
