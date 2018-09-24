@@ -71,7 +71,8 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 		log.Infof(status)
 		log.Infof(printRespBody(resp.Body))
 		defer resp.Body.Close()
-		log.Infof(len(config.ValidStatusCodes))
+		length := strconv.Itoa(len(config.ValidStatusCodes))
+		log.Infof(length)
 		if len(config.ValidStatusCodes) != 0 {
 			log.Infof("Attempting to loop through valid codes")
 			log.Infof(resp.StatusCode)
