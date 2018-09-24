@@ -69,7 +69,6 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 	} else {
 		status := strconv.Itoa(resp.StatusCode)
 		log.Infof(status)
-		log.Infof(printRespBody(resp.Body))
 		defer resp.Body.Close()
 		length := strconv.Itoa(len(config.ValidStatusCodes))
 		log.Infof(length)
