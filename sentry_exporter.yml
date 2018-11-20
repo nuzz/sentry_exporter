@@ -3,6 +3,7 @@ modules:
     prober: http
     timeout: 5s
     http:
-      prefix: https://sentry.com/api/0/projects/{namespace}/
+      prefix: http://sentry.headsandhands.ru:9000/api/0/projects/heads_and_hands/
       headers:
-        Authorization: Bearer {Token}
+        Authorization: Bearer 5a6840befc6c49759169ff464d69bb68cd6f2a75de7b4001a66e36decc2fa003
+
