@@ -7,10 +7,9 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 	"time"
-	"gopkg.in/yaml.v2"
-	"sync"
 	//"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
@@ -34,9 +33,9 @@ type Module struct {
 
 type HTTPProbe struct {
 	// Defaults to 2xx.
-	ValidStatusCodes       []int             `yaml:"valid_status_codes"`
-	Prefix                 string            `yaml:"prefix"`
-	Headers                map[string]string `yaml:"headers"`
+	ValidStatusCodes []int             `yaml:"valid_status_codes"`
+	Prefix           string            `yaml:"prefix"`
+	Headers          map[string]string `yaml:"headers"`
 }
 
 var Probers = map[string]func(string, http.ResponseWriter, Module) bool{

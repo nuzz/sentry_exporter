@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"regexp"
 	"io"
 	"io/ioutil"
 	"net/http"
-	"strings"
+	"regexp"
 	"strconv"
+	"strings"
 	"time"
+
 	"github.com/prometheus/common/log"
 )
 
@@ -29,7 +30,7 @@ func extractErrorRate(reader io.Reader, config HTTPProbe) int {
 }
 
 func printRespBody(reader io.Reader) string {
-	body, err:= ioutil.ReadAll(reader)
+	body, err := ioutil.ReadAll(reader)
 	if err != nil {
 		return "Error reading HTTP body"
 	}
@@ -45,7 +46,7 @@ func probeHTTP(target string, w http.ResponseWriter, module Module) (success boo
 	timestamp := strconv.FormatInt(time.Now().UTC().UnixNano(), 10)
 	log.Infof(timestamp)
 	beforeTenSec := int32(time.Now().Unix()) - 10
- 	requestURL := config.Prefix + target + "/stats/?resolution=10s&since=" + strconv.FormatInt(int64(beforeTenSec), 10) 
+	requestURL := config.Prefix + target + "/stats/?resolution=10s&since=" + strconv.FormatInt(int64(beforeTenSec), 10)
 	log.Infof(requestURL)
 	log.Infof("URL should be https://sentry.io/api/0/projects/screenscape-networks/%s", target)
 	log.Infof("Changing this back to normal now that we have proper slugs")
