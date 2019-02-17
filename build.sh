@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -ex
+
 go get github.com/nuzz/sentry_exporter
 $GOPATH/bin/promu build --config .promu.yml
 docker build -t sentry_exporter .
