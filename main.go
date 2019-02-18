@@ -10,11 +10,15 @@ import (
 	"sync"
 	"syscall"
 	"time"
+
 	//"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
 	"github.com/prometheus/common/version"
+	yaml "gopkg.in/yaml.v1"
 )
+
+// import yaml "gopkg.in/yaml.v1"
 
 type Config struct {
 	Modules map[string]Module `yaml:"modules"`
